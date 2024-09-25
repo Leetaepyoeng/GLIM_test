@@ -233,7 +233,26 @@ void CmfcCImageDlg::OnPaint()
 			dc.MoveTo(centerX + 1, centerY - crossLength);
 			dc.LineTo(centerX + 1, centerY + crossLength);
 
-			dc.SelectObject(pOldPen); // 원래 펜으로 복원
+			dc.SelectObject(pOldPen); // 복원
+
+			 // 좌표 값 텍스트 출력
+			CString strCoordinates;
+			strCoordinates.Format(_T("(%d, %d)"), centerX, centerY);  // 좌표
+
+			// 빨간색 텍스트 색상 설정
+			dc.SetTextColor(RGB(255, 0, 0)); // 빨간색으로 설정
+
+			// 텍스트 설정
+			CFont font;
+			font.CreatePointFont(80, _T("Arial")); // 포인트 크기
+			CFont* pOldFont = dc.SelectObject(&font);
+
+			// 텍스트
+			dc.TextOut(centerX + 5, centerY + 5, strCoordinates); // 위치 조정
+
+			// 원래 폰트로 복원
+			dc.SelectObject(pOldFont);
+			font.DeleteObject(); // 동적 생성된 폰트 객체 삭제
 		}
 	}
 	else
