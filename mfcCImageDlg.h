@@ -58,4 +58,6 @@ public:
 	int nSttY;
 	int nEndX;
 	int nEndY;
+	int nRadius;
+	afx_msg void OnBnClickedBtnDraw();
 };

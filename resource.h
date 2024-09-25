@@ -18,6 +18,8 @@
 #define IDC_EDIT_STT_Y                  1006
 #define IDC_EDIT_END_X                  1007
 #define IDC_EDIT_END_Y                  1008
+#define IDC_BTN_ACTION2                 1009
+#define IDC_BTN_DRAW                    1009
 
 // Next default values for new objects
 // 

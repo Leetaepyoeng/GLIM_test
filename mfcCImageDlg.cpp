@@ -90,6 +90,7 @@ BEGIN_MESSAGE_MAP(CmfcCImageDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BTN_ACTION, &CmfcCImageDlg::OnBnClickedBtnAction)
 	ON_WM_DESTROY()
 	ON_BN_CLICKED(IDC_BTN_ON_OFF, &CmfcCImageDlg::OnBnClickedBtnOnOff)
+	ON_BN_CLICKED(IDC_BTN_DRAW, &CmfcCImageDlg::OnBnClickedBtnDraw)
 END_MESSAGE_MAP()
 
 
@@ -363,7 +364,6 @@ void CmfcCImageDlg::MoveCircle(int nSttX, int nSttY, int nEndX, int nEndY, float
 {
 	//static int nSttX = 0;
 	//static int nSttY = 0;
-	int nGray = 80;
 	//int nWidth = m_image.GetWidth();
 	//int nHeight = m_image.GetHeight();
 	//int nPitch = m_image.GetPitch();
@@ -374,10 +374,10 @@ void CmfcCImageDlg::MoveCircle(int nSttX, int nSttY, int nEndX, int nEndY, float
 	//drawCircle(fm, nSttX, nSttY, nRadius, 0xff);
 	//drawCircle(fm, ++nSttX, ++nSttY, nRadius, nGray);
 
+	int nGray = 80;
 	int nWidth = m_image.GetWidth();
 	int nHeight = m_image.GetHeight();
 	int nPitch = m_image.GetPitch();
-	int nRadius = 10;
 	unsigned char* fm = (unsigned char*)m_image.GetBits();
 
 	// 현재 위치 계산
@@ -392,6 +392,36 @@ void CmfcCImageDlg::MoveCircle(int nSttX, int nSttY, int nEndX, int nEndY, float
 		UpdateDisplay();
 	}
 
+}
+
+void CmfcCImageDlg::OnBnClickedBtnDraw()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	// 기존 이미지가 존재하면 초기화
+	if (!m_image.IsNull()) {
+		InitDisplay();
+	}
+
+	// nRadius를 3부터 50까지의 랜덤 값으로 설정
+	nRadius = rand() % (50 - 3 + 1) + 3;  // 3 ~ 50
+	
+	// 에딧 컨트롤에서 좌표 읽기
+	CString strSttX, strSttY;
+	GetDlgItem(IDC_EDIT_STT_X)->GetWindowText(strSttX);
+	GetDlgItem(IDC_EDIT_STT_Y)->GetWindowText(strSttY);
+
+	// 문자열을 정수로 변환 및 예외처리
+	int nSttX = Clamp(_ttoi(strSttX), 0, 640 - 10);
+	int nSttY = Clamp(_ttoi(strSttY), 0, 480 - 10);
+
+	int nGray = 80;
+	int nWidth = m_image.GetWidth();
+	int nHeight = m_image.GetHeight();
+	int nPitch = m_image.GetPitch();
+	unsigned char* fm = (unsigned char*)m_image.GetBits();
+
+	drawCircle(fm, nSttX, nSttY, nRadius, nGray);
+	UpdateDisplay();
 }
 
 void CmfcCImageDlg::OnBnClickedBtnAction()
@@ -538,3 +568,5 @@ int CmfcCImageDlg::Clamp(int value, int min, int max) {
 	if (value > max) return max;
 	return value;
 }
+
+
