@@ -1,0 +1,14 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int n, int k) {
+    int sum = 0;
+    int food = 12000;
+    int drink = 2000;
+    int dc = n / 10;
+    
+    sum = food*n + drink*(k-dc);
+    return sum;
+}

@@ -1,0 +1,16 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int a, int b) {
+    int answer = 0;
+    int nAB = stoi(to_string(a)+to_string(b));
+    int nBA = stoi(to_string(b)+to_string(a));
+    
+    if(nAB > nBA)   
+        answer = nAB;
+    else    
+        answer = nBA;
+    return answer;
+}

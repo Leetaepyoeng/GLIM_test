@@ -1,0 +1,18 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<vector<int>> board, int k) {
+    int sum = 0;
+    
+    int nY = board.size();
+    int nX = board[0].size();
+    
+    for(int y = 0; y < nY; y++)
+        for(int x = 0; x < nX; x++)
+            if(x + y <= k)  sum += board[y][x];
+    
+    
+    return sum;
+}
