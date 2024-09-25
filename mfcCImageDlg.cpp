@@ -430,8 +430,8 @@ void CmfcCImageDlg::OnBnClickedBtnDraw()
 	GetDlgItem(IDC_EDIT_STT_Y)->GetWindowText(strSttY);
 
 	// 문자열을 정수로 변환 및 예외처리
-	int nSttX = Clamp(_ttoi(strSttX), 0, 640 - 10);
-	int nSttY = Clamp(_ttoi(strSttY), 0, 480 - 10);
+	int nSttX = Clamp(_ttoi(strSttX), 0, 640 - nRadius);
+	int nSttY = Clamp(_ttoi(strSttY), 0, 480 - nRadius);
 
 	int nGray = 80;
 	int nWidth = m_image.GetWidth();
@@ -459,10 +459,10 @@ void CmfcCImageDlg::OnBnClickedBtnAction()
 	GetDlgItem(IDC_EDIT_END_Y)->GetWindowText(strEndY);
 
 	// 문자열을 정수로 변환 및 예외처리
-	int nSttX = Clamp(_ttoi(strSttX), 0, 640-10);
-	int nSttY = Clamp(_ttoi(strSttY), 0, 480-10);
-	int nEndX = Clamp(_ttoi(strEndX), 0, 640-10);
-	int nEndY = Clamp(_ttoi(strEndY), 0, 480-10);
+	int nSttX = Clamp(_ttoi(strSttX), 0, 640- nRadius);
+	int nSttY = Clamp(_ttoi(strSttY), 0, 480- nRadius);
+	int nEndX = Clamp(_ttoi(strEndX), 0, 640- nRadius);
+	int nEndY = Clamp(_ttoi(strEndY), 0, 480- nRadius);
 
 
 	// 20번 이동
